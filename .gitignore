@@ -1,0 +1,16 @@
+# Dữ liệu của Moodle (KHÔNG BAO GIỜ push)
+moodledata/
+
+# Dữ liệu database local (KHÔNG BAO GIỜ push)
+moodle-db/
+
+# Các file rác
+.DS_Store
+*.log
+.vscode/
+
+# Bỏ qua nếu chạy composer/npm
+/vendor/
+/moodle/vendor/
+/node_modules/
+/moodle/node_modules/
