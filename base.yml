@@ -5,12 +5,13 @@ services:
       - db
     volumes:
       - "${MOODLE_DOCKER_WWWROOT}:/var/www/html"
+      - ./moodledata:/var/www/moodledata
       - "${ASSETDIR}/web/apache2_faildumps.conf:/etc/apache2/conf-enabled/moodle-faildump.conf"
     environment:
       MOODLE_DOCKER_RUNNING: 1
       MOODLE_DOCKER_DBNAME: moodle
       MOODLE_DOCKER_DBUSER: moodle
-      MOODLE_DOCKER_DBPASS: "m@0dl3ing"
+      MOODLE_DOCKER_DBPASS: "m@0dl3ing" 
       MOODLE_DOCKER_BROWSER: firefox
       MOODLE_DOCKER_WEB_HOST: "${MOODLE_DOCKER_WEB_HOST}"
       MOODLE_DOCKER_TIMEOUT_FACTOR: "${MOODLE_DOCKER_TIMEOUT_FACTOR}"

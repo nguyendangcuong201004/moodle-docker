@@ -3,6 +3,7 @@ moodledata/
 
 # Dữ liệu database local (KHÔNG BAO GIỜ push)
 moodle-db/
+moodle-db-data/
 
 # Các file rác
 .DS_Store
