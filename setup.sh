@@ -2,6 +2,19 @@
 
 echo "Setting up Moodle..."
 
+# --- Install direnv ---
+if ! command -v direnv &> /dev/null
+then
+    sudo apt update && sudo apt install -y direnv
+    # Add direnv hook to .bashrc if not already present
+    if ! grep -q 'direnv hook bash' ~/.bashrc; then
+      echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+      echo "   - Added direnv hook to ~/.bashrc. You MUST restart your terminal after this script."
+    fi
+else
+    echo "   - direnv is already installed."
+fi
+
 # 1. Copy config.php if it doesn't exist
 if [ ! -f "moodle/config.php" ]; then
   echo "   - Copying config.php template..."
