@@ -33,6 +33,10 @@ chmod +x bin/*
 # Manually export variables here as direnv is not assumed
 export MOODLE_DOCKER_WWWROOT=./moodle
 export MOODLE_DOCKER_DB=pgsql
+export MOODLE_DOCKER_WEB_PORT=0.0.0.0:80
+export MOODLE_DOCKER_WEB_HOST=$(curl -s ifconfig.me)
+
+
 
 bin/moodle-docker-compose up -d
 
@@ -46,4 +50,4 @@ bin/moodle-docker-compose exec -T -u root webserver chown www-data:www-data /var
 bin/moodle-docker-compose exec -T -u root webserver chown -R www-data:www-data /var/www/moodledata
 sudo chown 999:999 moodle-db-data # Required for PostgreSQL bind mount
 
-echo "Setup complete! Go to http://localhost:8000"
+echo "Setup complete! Go to http://${MOODLE_DOCKER_WEB_HOST}:${MOODLE_DOCKER_WEB_PORT}"
