@@ -1,5 +1,5 @@
 # Image PHP/Apache MoodleHQ
-FROM moodlehq/moodle-php-apache:8.1
+FROM moodlehq/moodle-php-apache:8.3
 
 
 # ARG instruction pass variable build-time
