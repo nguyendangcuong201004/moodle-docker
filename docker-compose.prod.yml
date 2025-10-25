@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # --- Dịch vụ Web Moodle (DÙNG IMAGE TỪ DOCKER HUB) ---
+  moodle:
+    image: ndcuongdevops/moodle-lms:latest # Hoặc dùng tag version: ndcuongdevops/moodle-lms:3
+    container_name: moodle_app_run # Tên container khi chạy
+    restart: unless-stopped
+    ports:
+      - "8000:80" # Map cổng 8000 máy bạn vào cổng 80 container
+    volumes:
+      # Cần thư mục moodledata để lưu file upload (BẮT BUỘC)
+      # Docker sẽ tự tạo thư mục moodledata nếu chưa có khi dùng volume có tên
+      - moodledata_vol:/var/www/moodledata
+    depends_on:
+      - db
+    networks:
+      - moodle-net
+
+  # --- Dịch vụ Database PostgreSQL ---
+  db:
+    image: postgres:15
+    container_name: moodle_db_run
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: "m@0dl3ing"
+      POSTGRES_DB: moodle
+    volumes:
+      # Dùng volume có tên để lưu data database (bền vững)
+      - moodledb_vol:/var/lib/postgresql/data
+    networks:
+      - moodle-net
+
+# Định nghĩa mạng chung
+networks:
+  moodle-net:
+    driver: bridge
+
+# Định nghĩa volume có tên (Docker sẽ quản lý)
+volumes:
+  moodledata_vol:
+  moodledb_vol:
